@@ -1,0 +1,22 @@
+<h1>New Game</h1>
+
+<p>Here are your random letters:</p>
+<p><%= @letters.join(', ') %></p>  <!-- Display the letters as a comma-separated string -->
+
+<%= form_with url: score_path, method: :post, data: { turbo: false } do %>
+  <!-- Pass the letters as a hidden field -->
+  <%= hidden_field_tag :letters, @letters.join(', ') %>
+
+  <!-- Text input for user to enter a word -->
+  <div>
+    <label for="word">Your word:</label>
+    <input type="text" name="word" id="word">
+  </div>
+
+  <!-- CSRF authenticity token for security -->
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+  <!-- Submit button -->
+  <%= submit_tag "Submit Word" %>
+<% end %>
+
